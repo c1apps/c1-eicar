@@ -19,12 +19,12 @@ node('jenkins-jenkins-slave') {
       "Check Image (pre-Registry)": {
         smartcheckScan([
           imageName: "${REPOSITORY}:$BUILD_NUMBER",
-          smartcheckHost: "${DSSC_SERVICE}",
+          smartcheckHost: smartcheck-3-127-196-237.nip.io:443,
           smartcheckCredentialsId: "smartcheck-auth",
           insecureSkipTLSVerify: true,
           insecureSkipRegistryTLSVerify: true,
           preregistryScan: true,
-          preregistryHost: "${DSSC_REGISTRY}",
+          preregistryHost: smartcheck-registry-3-127-196-237.nip.io:443,
           preregistryCredentialsId: "preregistry-auth",
           findingsThreshold: new groovy.json.JsonBuilder([
             malware: 3,
@@ -62,7 +62,7 @@ node('jenkins-jenkins-slave') {
                          kubeconfigId: "kubeconfig",
                          enableConfigSubstitution: true,
                          dockerCredentials: [
-                           [credentialsId: "registry-auth", url: "${K8S_REGISTRY}"],
+                           [credentialsId: "registry-auth", url: registry-3-127-196-237.nip.io:443],
                          ])
       }
     stage('DS Scan for Recommendations') {
