@@ -2,9 +2,6 @@ FROM centos:6
 
 RUN mkdir /demo_files
 COPY sample.jpg /demo_files
-
-WORKDIR /demo_files
-
-ADD https://secure.eicar.org/eicarcom2.zip eicarcom2.zip
+COPY eicar_com.zip /demo_files
 
 ENTRYPOINT sleep infinity
