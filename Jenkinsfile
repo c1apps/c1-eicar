@@ -1,6 +1,6 @@
 import groovy.json.JsonBuilder
 
-node {
+node ('jenkins-jenkins-slave') {
   withEnv(['REPOSITORY=c1-eicar']) {
     stage('Pull Image from Git') {
       script {
@@ -19,12 +19,12 @@ node {
       "Check Image (pre-Registry)": {
         smartcheckScan([
           imageName: "${REPOSITORY}:$BUILD_NUMBER",
-          smartcheckHost: "smartcheck-3-127-196-237.nip.io:443",
+          smartcheckHost: "${DSSC_SERVICE}",
           smartcheckCredentialsId: "smartcheck-auth",
           insecureSkipTLSVerify: true,
           insecureSkipRegistryTLSVerify: true,
           preregistryScan: true,
-          preregistryHost: "smartcheck-registry-3-127-196-237.nip.io:443",
+          preregistryHost: "${DSSC_REGISTRY}",
           preregistryCredentialsId: "preregistry-auth",
           findingsThreshold: new groovy.json.JsonBuilder([
             malware: 3,
@@ -62,7 +62,7 @@ node {
                          kubeconfigId: "kubeconfig",
                          enableConfigSubstitution: true,
                          dockerCredentials: [
-                           [credentialsId: "registry-auth", url: "https://registry-3-127-196-237.nip.io"],
+                           [credentialsId: "registry-auth", url: "${K8S_REGISTRY}"],
                          ])
       }
     stage('DS Scan for Recommendations') {
