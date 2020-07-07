@@ -1,6 +1,6 @@
 import groovy.json.JsonBuilder
 
-node('master') {
+node {
   withEnv(['REPOSITORY=c1-eicar']) {
     stage('Pull Image from Git') {
       script {
