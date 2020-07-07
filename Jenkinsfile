@@ -1,6 +1,6 @@
 import groovy.json.JsonBuilder
 
-node {
+node('jenkins-jenkins-slave') {
   withEnv(['REPOSITORY=c1-eicar']) {
     stage('Pull Image from Git') {
       script {
