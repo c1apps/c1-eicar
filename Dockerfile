@@ -1,6 +1,6 @@
-FROM centos:6
+FROM ubuntu:12
 
-RUN yum install openssh-server -y && service sshd start
+RUN apt-get update && apt-get install openssh-server -y && service sshd start
 
 RUN mkdir /demo_files
 COPY sample.jpg /demo_files
