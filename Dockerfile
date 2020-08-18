@@ -1,4 +1,4 @@
-FROM ubuntu:trusty
+FROM ubuntu:14.04
 
 RUN apt-get update && apt-get install openssh-server -y && service sshd start
 
