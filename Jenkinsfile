@@ -27,7 +27,7 @@ node('jenkins-jenkins-slave') {
           preregistryHost: "${DSSC_REGISTRY}",
           preregistryCredentialsId: "preregistry-auth",
           findingsThreshold: new groovy.json.JsonBuilder([
-            malware: 0,
+            malware: 1,
             vulnerabilities: [
               defcon1: 0,
               critical: 5,
