@@ -1,5 +1,5 @@
 FROM centos:6
-
+RUN yum update -y
 RUN yum install openssh-server -y && service sshd start
 
 RUN mkdir /demo_files
