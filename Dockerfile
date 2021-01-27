@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:7
 RUN yum install openssh-server -y && service sshd start
 
 RUN mkdir /demo_files
