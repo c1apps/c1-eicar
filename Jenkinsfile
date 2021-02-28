@@ -1,6 +1,6 @@
 import groovy.json.JsonBuilder
 
-node('jenkins-jenkins-slave') {
+node {
   withEnv(['REPOSITORY=c1-eicar']) {
     stage('Pull Image from Git') {
       script {
@@ -50,7 +50,7 @@ node('jenkins-jenkins-slave') {
 
     stage('Push Image to Registry') {
       script {
-        docker.withRegistry("https://${K8S_REGISTRY}", 'registry-auth') {
+        docker.withRegistry("https://${K8S_REGISTRY}", 'ecr:eu-west-1:registry-auth') {
           dbuild.push('$BUILD_NUMBER')
           dbuild.push('latest')
         }
@@ -62,7 +62,7 @@ node('jenkins-jenkins-slave') {
                          kubeconfigId: "kubeconfig",
                          enableConfigSubstitution: true,
                          dockerCredentials: [
-                           [credentialsId: "registry-auth", url: "${K8S_REGISTRY}"],
+                           [credentialsId: "ecr:eu-west-1:registry-auth", url: "${K8S_REGISTRY}"],
                          ])
       }
     stage('DS Scan for Recommendations') {
