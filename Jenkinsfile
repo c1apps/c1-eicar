@@ -27,7 +27,7 @@ node {
           preregistryHost: "${DSSC_REGISTRY}",
           preregistryCredentialsId: "preregistry-auth",
           findingsThreshold: new groovy.json.JsonBuilder([
-            malware: 1,
+            malware: o,
             vulnerabilities: [
               defcon1: 0,
               critical: 5,
